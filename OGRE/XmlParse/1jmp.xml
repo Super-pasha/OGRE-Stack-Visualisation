@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<code>
+
+	<setup org_address="10000h"/>
+	<setup esp_address="40000h"/>
+	<setup stack_size="10"/>
+
+	<command name="jmp"> <argument value="6"/> </command>
+	<command name="jmp"> <argument value="4"/> </command>
+	<command name="mov"> <argument value="eax"/> <argument value="4"/> </command>
+	<command name="jmp"> <argument value="eax"/> </command>
+	<command name="push"> <argument value="3"/> </command>
+	<command name="jmp"> <argument value="-3"/> </command>
+	<command name="jmp"> <argument value="-5"/> </command>
+	<command name="nop"> </command>
+  
+</code>

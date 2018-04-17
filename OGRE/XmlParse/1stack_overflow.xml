@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--<command name="mov"> <argument value="ecx"/> <argument value="eax"/> </command>
+<command name="mov"> <argument value="eax"/> <argument value="12345"/> </command>
+<command name="mov"> <argument value="1234"/> <argument value="12345H"/> </command>  -->
+	
+<!--<command name="mov"> <argument value="eax"/> <argument value="12345"/> </command>	
+	<command name="jmp"> <argument value="4"/> </command>
+	<command name="push"> <argument value="eax"/> </command>
+	<command name="jmp"> <argument value="100"/> </command>
+	<command name="call"> <argument value="20006"/> </command>
+	<command name="jmp"> <argument value="-3"/> </command>
+	<command name="push"> <argument value="2345H"/> </command>
+	<command name="pop"> <argument value="eax"/> </command>	  -->
+
+<code>
+
+	<setup org_address="20000"/>
+	<setup esp_address="4000000"/>
+	<setup stack_size="5"/>
+
+	<command name="push"> <argument value="1"/> </command>
+	<command name="pop"> <argument value="eax"/> </command>
+	<command name="push"> <argument value="2"/> </command>
+	<command name="push"> <argument value="3"/> </command>
+	<command name="push"> <argument value="4"/> </command>
+	<command name="push"> <argument value="5"/> </command>
+	<command name="push"> <argument value="6"/> </command>
+	<command name="push"> <argument value="eax"/> </command>
+  
+</code>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<code>
+
+	<setup org_address="20000h"/>
+	<setup esp_address="400000h"/>
+	<setup stack_size="10"/>
+
+	<command name="jmp"> <argument value="1"/> </command>
+	<command name="jmp"> <argument value="1"/> </command>
+	<command name="jmp"> <argument value="-100"/> </command>
+  
+</code>
