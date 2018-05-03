@@ -25,9 +25,9 @@ using namespace rapidxml;
 
 namespace Cubic
 {
-	const Ogre::Real scale_x = 2.5, scale_y = 2.5, scale_z = 2.5;  // k - how we increase cube
-	const Ogre::Real size_x = 5, size_y = 5, size_z = 5;  // real length of cube edges
-	const Ogre::Real delta_x = 2.5, delta_y = 2.5, delta_z = 2.5; // distance between cubes
+	const Ogre::Real scale_x = 2.5, scale_y = 2.5, scale_z = 2.5;	// k - how we increase cube
+	const Ogre::Real size_x = 5, size_y = 5, size_z = 5;			// real length of cube edges
+	const Ogre::Real delta_x = 2.5, delta_y = 2.5, delta_z = 2.5;	// distance between cubes
 
 	const Ogre::Real cameraBoost = 3;
 };
@@ -40,6 +40,10 @@ string uintValToHexString(uint val)
 }
 
 class CubeLetter
+/*
+	Creates a letter as a cubic object with a picture
+	Supports: a-z, space, 1-9, +-
+*/
 {
 public:
 
@@ -304,8 +308,8 @@ class CubeStack
 
 	CubeRegister* esp;
 
-	uint stackInitialAddr;  // <=
-	uint stackLastAddr;		// >
+	uint stackInitialAddr;  
+	uint stackLastAddr;		
 	uint stackMaxSize;
 
 public:
@@ -331,7 +335,7 @@ public:
 		{
 			Vector3 loc = location;
 			loc.y += i * Cubic::size_y;
-			loc.x += 8 * Cubic::size_x; // 4 bytes -> 8 digits and right
+			loc.x += 8 * Cubic::size_x; 
 
 			cubeAddr[i] = new CubeText(uintValToHexString(initial_address - i), node, ScnMgr, loc);
 
@@ -939,6 +943,7 @@ class AsmRet : public AsmCommand
 	}
 
 };
+
 // retn d
 class AsmRetn : public AsmCommand
 {
@@ -994,6 +999,22 @@ class AsmRetn : public AsmCommand
 ////////////////////////////////// imlemented asm commands
 
 class AsmCommandList
+/*
+
+Class for execution asm commands, supports:
+
+mov
+push
+pop
+call
+jmp
+ret
+retn
+add
+sub
+nop
+
+*/
 {
 	std::map<string, AsmCommand*> comMap;
 
@@ -1201,6 +1222,13 @@ private:
 };
 
 class MyFrameListener : public Ogre::FrameListener
+/*
+
+This class is need for moving inside 3d space 
+
+Use w,a,s,d for changing position and space for faster movement
+
+*/
 {
 private:
 
@@ -1304,9 +1332,9 @@ void Application::setup()
 	shadergen->addSceneManager(pSceneMgr);
 
 	// -- tutorial section start --
-	//! [turnlights]
+
+	//turnlights
 	pSceneMgr->setAmbientLight(ColourValue(0.5, 0.5, 0.5));
-	//! [turnlights]
 
 	Ogre::Light* light1 = pSceneMgr->createLight("Light1");
 	light1->setType(Ogre::Light::LT_DIRECTIONAL);
@@ -1334,6 +1362,7 @@ void Application::setup()
 	Vector3 addrStack = Vector3(-5.0f,  20.0f, 30.0f);
 	Vector3 addrReg = Vector3(8.0f, 10.0f, 16.2f);
 
+	// initializing model
 	printf("Parsing XmlParse\\xml_file.xml\n");
 	cubeInstructionStorage = new CubeInstructionStorage("XmlParse\\xml_file.xml",
 		pSceneMgr->getRootSceneNode(), pSceneMgr, addrStorage);
@@ -1353,7 +1382,6 @@ void Application::setup()
 	iWalker = new InstructionWalker(asmCommandList, cubeRegisterList, cubeStack, cubeInstructionStorage);
 
 	printf("All done\n");
-	// -- tutorial section end --
 }
 
 bool Application::keyPressed(const KeyboardEvent& evt)
@@ -1365,6 +1393,7 @@ bool Application::keyPressed(const KeyboardEvent& evt)
 
 	if (!is_error())
 	{
+		// using 'r' to go through asm code execution
 		if (evt.keysym.sym == SDLK_r)
 		{
 			string stat = iWalker->execCom();
